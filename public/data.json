@@ -1,0 +1,42 @@
+[
+  {
+    "id": "1",
+    "cnName": "虚拟DOM",
+    "enName": "Virtual DOM",
+    "categoryLevel1": "前端",
+    "categoryLevel2": "React",
+    "description": "React中使用的虚拟DOM，用于提高性能的抽象层。",
+    "tags": ["React", "性能", "渲染"],
+    "addedAt": "2025-07-14T08:00:00Z"
+  },
+  {
+    "id": "2",
+    "cnName": "闭包",
+    "enName": "Closure",
+    "categoryLevel1": "前端",
+    "categoryLevel2": "JavaScript",
+    "description": "函数与其词法环境的组合，允许函数访问外部变量。",
+    "tags": ["JavaScript", "函数", "作用域"],
+    "addedAt": "2025-07-14T08:05:00Z"
+  },
+  {
+    "id": "3",
+    "cnName": "中间件",
+    "enName": "Middleware",
+    "categoryLevel1": "后端",
+    "categoryLevel2": "Node",
+    "description": "在请求处理管道中处理请求的函数。",
+    "tags": ["Express", "请求", "管道"],
+    "addedAt": "2025-07-14T08:10:00Z"
+  },
+  {
+    "id": "4",
+    "cnName": "关系型数据库",
+    "enName": "Relational Database",
+    "categoryLevel1": "数据",
+    "categoryLevel2": "数据库",
+    "description": "基于关系模型组织数据的数据库系统。",
+    "tags": ["SQL", "数据库", "结构化"],
+    "addedAt": "2025-07-14T08:15:00Z"
+  }
+]

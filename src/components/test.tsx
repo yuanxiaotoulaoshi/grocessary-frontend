@@ -5,7 +5,6 @@ import App from './App'
 describe('<App />', () => {
   it('should render the App', () => {
     const { container } = render(<App />)
-    console.log("testtttt");
     expect(
       screen.getByRole('heading', {
         name: /Welcome!/i,
