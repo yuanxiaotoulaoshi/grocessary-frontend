@@ -2,7 +2,9 @@
 import { Link, useLocation } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../store';
-import {logout} from '../store/authSlice';
+import {login,logout} from '../store/authSlice';
+import { useEffect } from 'react';
+import {request} from '../services/api';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     const location = useLocation();
@@ -11,22 +13,45 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     const user = useSelector((state:RootState)=>state.auth.user);
     const dispatch = useDispatch();
 
+    useEffect(()=>{
+        request({
+            method:'GET',
+            url:'/auth/me',
+        }).then(res=>{
+            dispatch(login(res))
+        }).catch((err)=>{
+            console.log(err)
+            dispatch(logout())
+        })
+    },[])
+
+    const loginOut = ()=>{
+        request({
+            method:'POST',
+            data:{},
+            url:'/auth/logout',
+        }).then(res=>{
+            console.log('resss',res)
+            dispatch(logout());
+        })
+    }
+
     return (
         <div className="min-h-screen bg-white">
         {/* 固定导航栏 */}
         <header className="fixed top-0 left-0 right-0 bg-white shadow z-50">
             <div className="max-w-6xl mx-auto flex justify-between items-center py-4 px-6">
             <Link to="/" className="text-2xl font-bold text-blue-600">
-                devGlossary
+                Lexily
             </Link>
             <nav className="space-x-4">
             {isLoggedIn?(
                 <>
                     <span className="text-blue-600 font-medium">
-                        你好，{user || '用户'}
+                        你好，{user?.userName || '用户'}
                     </span>
                     <button
-                        onClick={() => dispatch(logout())}
+                        onClick={() =>loginOut()}
                         className="px-4 py-2 bg-blue-100 text-blue-600 rounded-lg hover:bg-blue-200 transition"
                     >
                         退出登录

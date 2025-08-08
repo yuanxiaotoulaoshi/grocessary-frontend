@@ -6,6 +6,7 @@ interface GlossaryItem {
   enName:string,
   categoryLevel1:string,
   categoryLevel2:string,
+  currentMetadata:string,
 }
 
 interface GlossaryState{

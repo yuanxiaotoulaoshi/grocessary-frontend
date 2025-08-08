@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect,useRef } from 'react';
 
 interface UseInfiniteScrollOptions {
   isLoading: boolean;
@@ -11,17 +11,17 @@ export function useInfiniteScroll(
   targetRef: React.RefObject<HTMLElement>,
   { isLoading, isLastPage, onLoadMore, rootMargin = '30px' }: UseInfiniteScrollOptions
 ){
-    const [hasFirstLoadCompleted, setHasFirstLoadCompleted] = useState(false);
+    const hasFirstLoadCompletedRef = useRef(false);
     useEffect(() => {
         if (!targetRef.current) return;
         if (isLoading || isLastPage) return;
         const observer = new IntersectionObserver(
             (entries) => {
                 const firstEntry = entries[0];
-                if (!hasFirstLoadCompleted) {
-                    setHasFirstLoadCompleted(true);
+                if (!hasFirstLoadCompletedRef.current) {
+                    hasFirstLoadCompletedRef.current = true;
                     return;
-                  }
+                }
                 if (firstEntry.isIntersecting && !isLoading && !isLastPage) {
                     onLoadMore();
                 }

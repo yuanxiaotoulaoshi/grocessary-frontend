@@ -79,9 +79,9 @@ const List: React.FC<ListProps> = ({ searchTerm }) => {
         <div className="grid grid-cols-1 gap-4">
             {filteredList.map((item) => (
                 <div key={item.id} className="flex items-center bg-white p-4 rounded shadow hover:shadow-md transition">
-                    <div className="basis-1/2 text-lg font-semibold">{item.cnName}</div>
+                    {currentLevel1Label!=='Collocations'&&<div className="basis-1/2 text-lg font-semibold">{item.cnName}</div>}
                     <div className="flex basis-1/2 align items-center text-sm text-gray-500 overflow-hidden text-ellipsis">
-                        <Volume text={item.enName}></Volume>
+                        <Volume glossaryItem={item}></Volume>
                         <div className='ml-[10px]'>{item.enName}</div>
                     </div>
                 </div>

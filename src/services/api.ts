@@ -1,7 +1,11 @@
 import axios, { InternalAxiosRequestConfig, AxiosResponse } from 'axios';
 // 创建 axios 实例
+export const BASE_URL = import.meta.env.MODE === 'development'
+  ? 'http://localhost:3000'
+  : 'https://api.ycong.xyz';
+  
 const api = axios.create({
-  baseURL: 'http://localhost:3000', // 你实际接口地址
+  baseURL: BASE_URL, // 你实际接口地址
   timeout: 60000*3,
   withCredentials: true,
 });

@@ -1,24 +1,36 @@
 // src/pages/Login.jsx
 import { useState } from 'react';
 import {request} from '../services/api';
+import {login} from '../store/authSlice';
+import {useDispatch, } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 export default function LoginPage() {
+  const dispatch = useDispatch();
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [remember, setRemember] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogin = (e:any) => {
     e.preventDefault();
     // TODO: 登录逻辑，例如 dispatch(loginThunk({ email, password }))
     request({
-      method:'POST',
-      url:'/auth/login',
-      data:{
-        userName,
-        password,
-      },
-    }).then(res=>{
-      console.log("ressss",res)
+        method:'POST',
+        url:'/auth/login',
+        data:{
+            userName,
+            password,
+        },
+    }).then((res)=>{
+        console.log("rssss",res)
+        return request({ method:'GET',url:'/auth/me',})
+    }).then(user=>{
+        console.log("userrrr",user)
+        dispatch(login(user))
+        navigate('/');
+    }).catch(err=>{
+        console.log(err)
     })
   };
 

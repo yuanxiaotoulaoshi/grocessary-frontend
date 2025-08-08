@@ -1,12 +1,12 @@
 import {useEffect, useRef,useState} from 'react';
 import { Star } from 'lucide-react';
-import {request} from '../../services/api';
+import {request} from '../services/api';
 import VideoUpload from 'components/Listen/VideoUpload';
 
-export default function GlossaryListening() {
+export default function  IntensiveListening() {
     type PlayMode = 'default' | 'pauseAfter' | 'loop';
     type SubtitleSegment = {
-        id: number;
+        index: number;
         start: number;
         end: number;
         text: string;
@@ -32,17 +32,18 @@ export default function GlossaryListening() {
         }
     };
 
-    const handleCollectSentences = (sub:any)=>{
-        const {text,start,end,id} = sub;
+    const handleCollectSentences = (sub:any,index:number)=>{
+        const {text,start,end} = sub;
+        console.log('subbb',sub);
         request({
             method: 'POST',
             url: '/listen/collect',
             data: {
                 sentence:text,
-                videoId:id,
+                videoId:index,
                 start:start,
                 end:end,
-                audioPath:'sentence_'+id+'.mp3',
+                audioPath:'sentence_'+index+'.mp3',
                 baseName,
             },
         }).then((res) => {
@@ -66,8 +67,8 @@ export default function GlossaryListening() {
             console.log("baseName2222",baseName)
             setBaseName(baseName);
             // 上传成功后轮询字幕处理结果
-            const pollInterval = 10*1000; // 每5秒轮询
-            const maxAttempts = 60; // 最多轮询 30 次
+            const pollInterval = 20*1000; // 每5秒轮询
+            const maxAttempts = 60; // 最多轮询 60 次
             let attempts = 0;
 
             const pollForTranscript = () => {
@@ -162,10 +163,10 @@ export default function GlossaryListening() {
                 <div className="flex-1 max-h-[500px] overflow-y-auto bg-white rounded-xl shadow-md border p-4">
                     <h3 className="text-lg font-semibold mb-4">Subtitles</h3>
                     <div className="space-y-3">
-                        {subtitles.map((sub)=>(    
-                            <div className='flex items-center gap-2 group' key={sub.id}>
+                        {subtitles.map((sub,index)=>(    
+                            <div className='flex items-center gap-2 group' key={index}>
                                 <Star 
-                                    onClick={()=>handleCollectSentences(sub)}  
+                                    onClick={()=>handleCollectSentences(sub,index)}  
                                     className="w-5 h-5 mt-1 text-gray-400 hover:text-yellow-500 cursor-pointer"
                                 />
                                 <div 

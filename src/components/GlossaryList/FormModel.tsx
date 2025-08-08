@@ -1,16 +1,20 @@
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import {RootState, AppDispatch} from 'store'
+import {setCategoryInfo} from '../../store/tabSlice';
 import { useForm } from "react-hook-form";
-import {RootState} from 'store'
 import {request} from '../../services/api';
 import { RefreshCcw } from 'lucide-react';
 
 interface FormModelProps {
-  showForm: boolean,
-  setShowForm: (show: boolean) => void;
+    defaultEnName:string,
+    currentMetadata:string,
+    showForm: boolean,
+    setShowForm: (show: boolean) => void;
 }
 
-const FormModel: React.FC<FormModelProps> = ({showForm,setShowForm})=>{
+const FormModel: React.FC<FormModelProps> = ({defaultEnName,currentMetadata,showForm,setShowForm})=>{
+    const dispatch = useDispatch<AppDispatch>();
     const categoryInfo = useSelector((state: RootState) => state.selectedTab.categoryInfo)
     const level1Tabs = Object.keys(categoryInfo);
     const {
@@ -43,10 +47,11 @@ const FormModel: React.FC<FormModelProps> = ({showForm,setShowForm})=>{
             method:'POST',
             url:'/glossary/add',
             data:{
-                cnName:data.cnName,
+                cnName:data.cnName||'/',
                 enName:data.enName,
                 categoryLevel1:data.curFirstCategory,
                 categoryLevel2:data.curSecondCategory,
+                currentMetadata,
             }
         }).then((res)=>{
             if(res.insert){
@@ -54,6 +59,7 @@ const FormModel: React.FC<FormModelProps> = ({showForm,setShowForm})=>{
             }else{
                 alert(res.message);
             }
+            setShowForm(false);
         })
     }
 
@@ -66,6 +72,28 @@ const FormModel: React.FC<FormModelProps> = ({showForm,setShowForm})=>{
             }
         })
     }
+
+    useEffect(()=>{
+        if(level1Tabs.length===0){
+            request({
+                method:'GET',
+                url:'/glossary/categories',
+            }).then((res)=>{
+                dispatch(setCategoryInfo(res));
+            })
+        }
+    },[])
+
+    useEffect(() => {
+        if (showForm) {
+          reset({
+            cnName: defaultEnName?'/':'',
+            enName: defaultEnName,
+            curFirstCategory: '',
+            curSecondCategory: ''
+          });
+        }
+      }, [defaultEnName, showForm]);
 
     useEffect(()=>{
         if(showForm){
@@ -90,7 +118,7 @@ const FormModel: React.FC<FormModelProps> = ({showForm,setShowForm})=>{
                         <input 
                             type="text" 
                             className="w-full p-2 border rounded" 
-                            {...register('cnName', { required: true })}
+                            {...register('cnName',{ required: true })}
                         />
                     </div>
                     <div>
@@ -100,9 +128,9 @@ const FormModel: React.FC<FormModelProps> = ({showForm,setShowForm})=>{
                             <div className="ml-1 text-xs text-gray-600">自动翻译</div>
                         </div>
                         <input 
-                        type="text" 
-                        className="w-full p-2 border rounded" 
-                        {...register('enName', { required: true })}
+                            type="text" 
+                            className="w-full p-2 border rounded" 
+                            {...register('enName', { required: true })}
                         />
                     </div>
                     <div className="col-span-2">
