@@ -12,6 +12,7 @@ interface FavoriteItem{
     end: number;
     videoId: string;
     baseName:string;
+    collectedAt:string;
 }
 export default function Collect(){
     const [favorites,setFavorites] = useState<FavoriteItem[]>([]);
@@ -89,8 +90,6 @@ export default function Collect(){
         if (!li) return;
         if (li.closest(".form-dialog")) return;
         if(text && text.length > 0 ){
-            console.log("***",li.dataset);
-
             const baseName = li.dataset.baseName;
             const videoId = li.dataset.videoId;
             setTimeout(() => {
@@ -153,6 +152,13 @@ export default function Collect(){
 		setAudioInstance(newAudio)
     }
 
+    const formatDate = (time: string) => {
+        if (!time) return '--';
+        const now = Date.now(); 
+        const diffDays = (now - new Date(time).getTime()) / (1000 * 60 * 60 * 24);
+        return Math.ceil(diffDays); 
+    }
+
     return(
         <div ref={listRef} className="max-w-2xl mx-auto mt-8 p-6 bg-gray-50 rounded-3xl shadow-md">
 		    <h2 className="text-2xl font-bold mb-4">我的收藏</h2>
@@ -177,18 +183,18 @@ export default function Collect(){
                     <p className="mt-2 text-sm">快去看看，收藏一些喜欢的句子吧！</p>
                 </div>
                 ):(<ul className="space-y-4">
-                    {favorites.map((item) => (
+                    {favorites.map((item,index) => (
                         <li
                             onClick={() => playAudio(item.baseName,item.videoId)}
-                            key={item._id}
+                            key={index}
                             data-base-name={item.baseName}
                             data-video-id={item.videoId}
-                            className={`text-sentence p-4 rounded-2xl shadow flex justify-between items-center gap-4 transition cursor-pointer ${currentAudio === item.videoId ? 'bg-blue-100' : 'bg-white'} hover:bg-gray-100`}
+                            className={`text-sentence p-4 rounded-2xl shadow flex justify-between items-center gap-4 transition cursor-pointer ${currentAudio === item.videoId ? 'bg-theme/10' : 'bg-white'} hover:bg-gray-100`}
                         >
                             <div className="flex-1">
                             <p className="text-gray-800">{item.sentence}</p>
                             <p className="text-sm text-gray-500 mt-1">
-                                时长: {(item.end - item.start).toFixed(2)} 秒 | 视频 ID: {item.videoId}
+                                时长: {(item.end - item.start).toFixed(2)} 秒 | 收藏日期: {formatDate(item.collectedAt)}天前
                             </p>
                             </div>
                             <div className="flex gap-2">
@@ -198,7 +204,7 @@ export default function Collect(){
                                         e.stopPropagation()
                                         handleDelete(item._id)
                                     }}
-                                    className="px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition"
+                                    className="px-4 py-2 bg-theme text-white rounded-xl hover:bg-theme transition"
                                 >
                                     取消收藏
                                 </button>
@@ -211,7 +217,7 @@ export default function Collect(){
 
             {/* loadmore */}
             <div className="flex flex-col items-center mt-6 space-y-2">
-                {!isLoading && !isLastPage && <div className="text-blue-600 cursor-pointer hover:underline text-sm" ref={loadMoreRef}></div>}
+                {!isLoading && !isLastPage && <div className="text-theme cursor-pointer hover:underline text-sm" ref={loadMoreRef}></div>}
                 {isLoading && <p className="text-gray-500 text-sm animate-pulse">加载中...</p>}
                 {favorites.length === 0 && !isLoading && (
                     <p className="text-center text-gray-500">暂无数据</p>

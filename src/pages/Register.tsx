@@ -35,7 +35,7 @@ export default function LoginPage() {
               placeholder="用户名"
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
-              className="w-full border-b border-gray-300 focus:outline-none focus:border-blue-500 text-gray-800 py-2"
+              className="w-full border-b border-gray-300 focus:outline-none focus:border-theme text-gray-800 py-2"
               required
             />
           </div>
@@ -45,7 +45,7 @@ export default function LoginPage() {
               placeholder="密码"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full border-b border-gray-300 focus:outline-none focus:border-blue-500 text-gray-800 py-2"
+              className="w-full border-b border-gray-300 focus:outline-none focus:border-theme text-gray-800 py-2"
               required
             />
           </div>
@@ -56,14 +56,14 @@ export default function LoginPage() {
               placeholder="电子邮件"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full border-b border-gray-300 focus:outline-none focus:border-blue-500 text-gray-800 py-2"
+              className="w-full border-b border-gray-300 focus:outline-none focus:border-theme text-gray-800 py-2"
               required
             />
           </div>
           
           <button
             type="submit"
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 rounded-full transition"
+            className="w-full bg-theme hover:bg-theme text-white font-bold py-2 rounded-full transition"
           >
             创建账户
           </button>

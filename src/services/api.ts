@@ -10,18 +10,6 @@ const api = axios.create({
   withCredentials: true,
 });
 
-// 请求拦截器：自动带 token
-api.interceptors.request.use(
-  (config: InternalAxiosRequestConfig) => {
-    const token = localStorage.getItem('token');
-    if (token && config.headers) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
-
 // 响应拦截器：统一处理错误
 api.interceptors.response.use(
   (response: AxiosResponse) => response.data, // 直接返回响应体 data

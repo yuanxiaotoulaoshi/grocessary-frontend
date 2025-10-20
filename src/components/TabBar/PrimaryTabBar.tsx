@@ -31,7 +31,7 @@ export default function PrimaryTabBar() {
                     key={i}
                     className={({ selected }) =>
                         `px-4 py-2 rounded ${
-                        selected ? 'bg-blue-600 text-white' : 
+                        selected ? 'bg-theme text-white' : 
                         'bg-gray-200 text-gray-700'
                         }`
                     }

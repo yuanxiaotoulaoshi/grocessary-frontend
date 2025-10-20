@@ -1,9 +1,16 @@
 /** @type {import('tailwindcss').Config} */
-
 export default {
-  content: ['./src/**/*.{mjs,js,ts,jsx,tsx}'],
-  theme: {
-    extend: {}
-  },
-  plugins: []
+    darkMode:'class',
+    content: ['./src/**/*.{mjs,js,ts,jsx,tsx}'],
+    theme: {
+        extend: {
+            colors:{
+                theme:{
+                    DEFAULT: 'rgb(52, 152, 166)',
+                },
+                'white':'var(--color-bg-white)',
+            }
+        }
+    },
+    plugins: []
 }

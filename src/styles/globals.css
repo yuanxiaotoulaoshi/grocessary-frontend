@@ -1,0 +1,7 @@
+:root{
+    --color-bg-white:#FFFFFF;
+}
+
+.dark{
+    --color-bg-white:#000000;
+}

@@ -1,13 +1,38 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import {setGlossaryList} from '../../store/glossarySlice';
 import { useSelector, useDispatch } from 'react-redux';
-import {request} from '../../services/api';
+import {request,BASE_URL} from '../../services/api';
 import {RootState,AppDispatch} from 'store';
 import { useInfiniteScroll } from '../../hooks/useInfiniteScroll';
 import Volume from './Volume';
+import { throttle } from "lodash";
+
 interface ListProps {
     searchTerm: string;
 }
+
+type glossaryItem = {
+    id:string,
+    cnName:string,
+    enName:string,
+    categoryLevel1:string,
+    categoryLevel2:string,
+    currentMetadata:string,
+} 
+
+// 语音合成
+const useThrottledSpeak = () => {
+    const speak = (text: string) => {
+        const utterance = new SpeechSynthesisUtterance(text);
+        speechSynthesis.speak(utterance);
+    };
+
+    return React.useMemo(
+        () => throttle(speak, 2000, { leading: true, trailing: false }),
+        []
+    );
+};
+
 
 const List: React.FC<ListProps> = ({ searchTerm }) => {
     const dispatch = useDispatch<AppDispatch>();
@@ -24,6 +49,10 @@ const List: React.FC<ListProps> = ({ searchTerm }) => {
     const [isLoading, setIsLoading] = useState(false);
     const PAGE_SIZE = 10;
     const loadMoreRef = useRef<HTMLDivElement>(null);
+
+    const throttledSpeak = useThrottledSpeak();
+
+	const [audioInstance, setAudioInstance] = useState<HTMLAudioElement|null>(null);
 
     useInfiniteScroll(loadMoreRef, {
         isLoading,
@@ -75,13 +104,40 @@ const List: React.FC<ListProps> = ({ searchTerm }) => {
         );
     }, [glossaryList, searchTerm]);
 
+    const playAudio = (currentMetadata: string) => {
+        const baseName = currentMetadata.split(',')[0];
+        const videoId = currentMetadata.split(',')[1];
+        const selectedText = window.getSelection()?.toString();
+        if (selectedText && selectedText.length > 0) return;
+        const url = `${BASE_URL}/uploads/${baseName}_sentences/sentence_${videoId}.mp3`;
+        if(audioInstance){
+            audioInstance.pause();
+            audioInstance.currentTime = 0;
+        }
+        const newAudio = new Audio(url);
+        newAudio.play();
+        setAudioInstance(newAudio)
+    };
+
+    const handlePlay = (item: glossaryItem) => {
+        if (item.currentMetadata) {
+            playAudio(item.currentMetadata);
+        } else {
+            throttledSpeak(item.enName);
+        }
+    };
+
     return (
         <div className="grid grid-cols-1 gap-4">
             {filteredList.map((item) => (
-                <div key={item.id} className="flex items-center bg-white p-4 rounded shadow hover:shadow-md transition">
+                <div 
+                    key={item.id} 
+                    className="flex items-center bg-white p-4 rounded shadow hover:shadow-md transition"
+                    onClick={() => handlePlay(item)}
+                >
                     {currentLevel1Label!=='Collocations'&&<div className="basis-1/2 text-lg font-semibold">{item.cnName}</div>}
                     <div className="flex basis-1/2 align items-center text-sm text-gray-500 overflow-hidden text-ellipsis">
-                        <Volume glossaryItem={item}></Volume>
+                        <Volume/>
                         <div className='ml-[10px]'>{item.enName}</div>
                     </div>
                 </div>
@@ -89,7 +145,7 @@ const List: React.FC<ListProps> = ({ searchTerm }) => {
 
             {/* loadmore */}
             <div className="flex flex-col items-center mt-6 space-y-2">
-                {!isLoading && !isLastPage && <div className="text-blue-600 cursor-pointer hover:underline text-sm" ref={loadMoreRef}></div>}
+                {!isLoading && !isLastPage && <div className="text-theme cursor-pointer hover:underline text-sm" ref={loadMoreRef}></div>}
                 {isLoading && <p className="text-gray-500 text-sm animate-pulse">加载中...</p>}
                 {filteredList.length === 0 && !isLoading && (
                     <p className="text-center text-gray-500">暂无数据</p>

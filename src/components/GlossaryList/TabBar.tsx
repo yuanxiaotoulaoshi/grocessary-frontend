@@ -12,7 +12,6 @@ export default function TabBar() {
     const level1Tabs = Object.keys(categoryInfo);
     const currentLevel1Label = level1Tabs[activeLevel1];
     const level2Tabs = categoryInfo[currentLevel1Label as keyof typeof categoryInfo]  || [];
-    
     useEffect(()=>{
         request({
             method:'GET',
@@ -34,7 +33,7 @@ export default function TabBar() {
                     key={label}
                     className={({ selected }) =>
                         `px-4 py-2 rounded ${
-                        selected ? 'bg-blue-600 text-white' : 
+                        selected ? 'bg-theme text-white' : 
                         'bg-gray-200 text-gray-700'
                         }`
                     }
@@ -51,7 +50,7 @@ export default function TabBar() {
                 onChange={(index) => {
                 dispatch(setActiveLevel2({ level1: activeLevel1, level2: index }));
                 }}>
-                <TabList className="flex space-x-2 mb-4">
+                <TabList className="flex flex-wrap gap-x-2 gap-y-2 mb-4">
                 {level2Tabs.map((sub:any,i) => {
                     const selected = i === activeLevel2ByLevel1[activeLevel1][1];
                     return (

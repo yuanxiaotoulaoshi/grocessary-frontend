@@ -10,8 +10,6 @@ export default function MyChunk() {
     const [isLastPage, setIsLastPage] = useState(false); 
     const [isLoading, setIsLoading] = useState(false);
     const PAGE_SIZE = 10;
-    // const loadMoreRef = useRef<HTMLDivElement>(null);
-    // const listRef = useRef<HTMLDivElement>(null);
     const getChunkList = (reset = false)=>{
         request({
             method: 'GET',
@@ -41,7 +39,7 @@ export default function MyChunk() {
                     key={index}
                     className={`p-4 rounded-2xl shadow flex justify-between items-center gap-4 transition cursor-pointer  hover:bg-gray-100`}
                 >
-                    <p className="text-gray-800">{item?.chunk}</p>
+                    {/* <p className="text-gray-800">{item?.chunk}</p> */}
                 </li>
             ))}
         </div>

@@ -158,7 +158,7 @@ const FormModel: React.FC<FormModelProps> = ({defaultEnName,currentMetadata,show
 
                 <div className="flex justify-end space-x-4 mt-5">
                     <button type="button" onClick={onCancel} className="text-gray-600 hover:underline">取消</button>
-                    <button type="submit"  className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">提交</button>
+                    <button type="submit"  className="bg-theme text-white px-4 py-2 rounded hover:bg-them/70">提交</button>
                 </div>
             </form>   
         </div>
