@@ -1,8 +1,8 @@
-import TabBar from '../components/GlossaryList/TabBar';
+import TabBarContainer from 'components/GlossaryList/TabBar/TabBarContainer';
 import SearchInput from '../components/GlossaryList/SearchInput';
 import List from '../components/GlossaryList/List';
 import AddButton from '../components/GlossaryList/AddButton';
-import FormModel from '../components/GlossaryList/FormModel';
+import FormModalContainer from 'components/GlossaryList/FormModal/FormModalContainer';
 import { useState } from 'react';
 
 export default function GlossaryList() {
@@ -10,14 +10,16 @@ export default function GlossaryList() {
     const [showForm, setShowForm] = useState(false);
     return (
         <div>
-            <TabBar/>
+            <TabBarContainer/>
             <SearchInput searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
             <AddButton setShowForm={setShowForm}/>
-            <FormModel 
-                showForm={showForm} 
-                setShowForm={setShowForm}
+            <FormModalContainer 
                 defaultEnName=''
                 currentMetadata=''
+                theme='light'
+                className=''
+                showForm={showForm}
+                setShowForm={setShowForm}
             />
             <List searchTerm={searchTerm}/>
         </div>
