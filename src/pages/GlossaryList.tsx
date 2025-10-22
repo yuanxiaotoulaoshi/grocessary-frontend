@@ -1,9 +1,9 @@
 import TabBarContainer from 'components/GlossaryList/TabBar/TabBarContainer';
-import SearchInput from '../components/GlossaryList/SearchInput';
-import List from '../components/GlossaryList/List';
+import SearchInputContainer from '../components/GlossaryList/SearchInput/SearchInputContainer';
 import AddButton from '../components/GlossaryList/AddButton';
 import FormModalContainer from 'components/GlossaryList/FormModal/FormModalContainer';
 import { useState } from 'react';
+import ListContainer from 'components/GlossaryList/List/ListContainer';
 
 export default function GlossaryList() {
     const [searchTerm, setSearchTerm] = useState('');
@@ -11,17 +11,20 @@ export default function GlossaryList() {
     return (
         <div>
             <TabBarContainer/>
-            <SearchInput searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+            <SearchInputContainer 
+                searchTerm={searchTerm} 
+                setSearchTerm={setSearchTerm} 
+            />
             <AddButton setShowForm={setShowForm}/>
-            <FormModalContainer 
+            {showForm && (<FormModalContainer 
                 defaultEnName=''
                 currentMetadata=''
                 theme='light'
                 className=''
                 showForm={showForm}
                 setShowForm={setShowForm}
-            />
-            <List searchTerm={searchTerm}/>
+            />)}
+            <ListContainer searchTerm={searchTerm}/>
         </div>
     );
 }

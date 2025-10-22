@@ -62,11 +62,8 @@ export default function FormModalContainer({
         curFirstCategory: errors.curFirstCategory?.message as string || '',
         curSecondCategory: errors.curSecondCategory?.message as string || '',
     };
-
-
     return(
         <FormModalUI
-            showForm={showForm}
             formFields={formFields}
             errors={formattedErrors}
             level1Tabs={level1Tabs}

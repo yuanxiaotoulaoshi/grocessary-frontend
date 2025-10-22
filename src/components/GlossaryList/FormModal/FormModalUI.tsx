@@ -2,7 +2,7 @@
 import { RefreshCcw } from 'lucide-react';
 
 interface FormModelProps {
-    showForm: boolean;
+    // showForm: boolean;
     formFields:{
         cnName: string;
         enName: string;
@@ -22,7 +22,7 @@ interface FormModelProps {
 }
 
 export default function FormModalUI({
-    showForm,
+    // showForm,
     formFields,
     level1Tabs,
     secondCategory,
@@ -35,7 +35,8 @@ export default function FormModalUI({
     accentColor = '#22c55e',
     className = '',
 }:FormModelProps){
-    if(!showForm) return null;
+    // if(!showForm) return null;
+    
     const themeClass =
     theme === 'dark'
       ? 'bg-gray-800 text-gray-100 border-gray-600'

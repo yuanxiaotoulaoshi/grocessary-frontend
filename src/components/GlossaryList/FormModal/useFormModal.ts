@@ -62,7 +62,9 @@ export function useFormModal(defaultEnName:string,currentMetadata:string){
     }, [curFirstCategory, setValue]);
 
     useEffect(() => {
+        console.log("level1Tabs:",level1Tabs)
         if (level1Tabs.length === 0) {
+        console.log("$$$")
         request({ method: 'GET', url: '/glossary/categories' }).then((res) => {
             dispatch(setCategoryInfo(res));
         });
