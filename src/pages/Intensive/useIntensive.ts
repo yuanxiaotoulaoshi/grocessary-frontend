@@ -1,11 +1,8 @@
 import {useEffect, useRef,useState} from 'react';
-import { Star } from 'lucide-react';
-import {request} from '../services/api';
+import {request} from '../../services/api';
 import { useLocation } from 'react-router-dom';
-import VideoUploadContainer from 'components/Listen/VideoUpload/VideoUploadContainer';
-import FormModel from '../components/GlossaryList/FormModel';
 
-export default function  IntensiveListening() {
+export default function useIntensive(){
     type PlayMode = 'default' | 'pauseAfter' | 'loop';
     type SubtitleSegment = {
         index: number;
@@ -28,7 +25,7 @@ export default function  IntensiveListening() {
     const [currentMetadata,setCurrentMetadata] = useState("");
 
     const [activeIndex, setActiveIndex] = useState<number|null>(null)
-    const subtitleRefs = useRef<(HTMLDivElement|null)[]>([])
+    const subtitleRefs = useRef<(HTMLDivElement | null)[]>([]);
 
     const modeSettings: { mode: PlayMode; name: string }[] = [
         { mode: 'default', name: '顺序播放' },
@@ -118,9 +115,7 @@ export default function  IntensiveListening() {
     useEffect(() => {
         const video = videoRef.current;
         if (!video) return;
-
         const onTimeUpdate = () => {
-
             if (currentSegment) {
                 if (playMode === 'pauseAfter' && video.currentTime >= currentSegment.end) {
                     video.pause();
@@ -202,72 +197,23 @@ export default function  IntensiveListening() {
         return `${m}:${s.toString().padStart(2,'0')}`;
     };
 
-    return (
-        <div className="p-6 bg-gray-50 min-h-screen">
-
-            <div className="p-10 max-w-xl mx-auto">
-                <h1 className="text-2xl font-bold mb-4">Upload Your MP4 Video</h1>
-                <VideoUploadContainer 
-                    onUploadSuccess={handleUploadSuccess}
-                />
-            </div>
-
-            <div className="mb-2">
-                {modeSettings.map((item)=>(
-                    <button 
-                        onClick={() => setPlayMode(item.mode)}
-                        className={`px-4 py-2 mr-2 rounded-lg border text-sm font-medium transition 
-                            ${  playMode === item.mode
-                                    ? 'bg-theme text-white border-theme'
-                                    : 'bg-white text-gray-800 border-gray-300 hover:bg-gray-100'
-                            }`}
-                        key={item.mode}
-                    >{item.name}</button>))}
-            </div>
-
-            <div className="flex gap-6 flex-col lg:flex-row">
-                <div className="flex-shrink-0">
-                    <video 
-                        ref={videoRef}
-                        width="500"
-                        controls
-                        className="rounded-xl shadow-md border"
-                        src={videoUrl}
-                    /> 
-                </div>
-                
-                <div className="flex-1 max-h-[500px] overflow-y-auto bg-white rounded-xl shadow-md border p-4">
-                    <h3 className="text-lg font-semibold mb-4">Subtitles</h3>
-                    <div ref={listRef} className="space-y-3">
-                        {subtitles.map((sub,index)=>(    
-                            <div 
-                                className="text-sentence flex items-center gap-2 group rounded-lg p-1"
-                                key={index}
-                                data-video-id={index}
-                            >
-                                <Star 
-                                    onClick={()=>handleCollectSentences(sub,index)}  
-                                    className="w-5 h-5 mt-1 text-gray-400 hover:text-yellow-500 cursor-pointer"
-                                />
-                                <div 
-                                    ref={(el)=>(subtitleRefs.current[index] = el)}
-                                    onClick={()=>handleSubtitleClick(sub.start,sub.end)}
-                                    className={`cursor-pointer p-2 rounded-lg hover:bg-blue-50 w-full transition ${index===activeIndex&&playMode==='default'?'bg-theme/10':''}`}
-                                >
-                                    <div className="text-xs text-gray-500 mb-1">{formatTime(sub.start)} - {formatTime(sub.end)}</div>
-                                    <div className="text-sm leading-snug">{sub.text}</div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
-            <FormModel 
-                defaultEnName={selectedText}
-                currentMetadata={currentMetadata}
-                showForm={showForm} 
-                setShowForm={()=>setShowForm(false)}
-            />
-        </div>
-    )
+    return {
+        modeSettings,
+        playMode,
+        videoRef,
+        videoUrl,
+        listRef,
+        subtitles,
+        subtitleRefs,
+        activeIndex,
+        selectedText,
+        currentMetadata,
+        showForm,
+        handleUploadSuccess,
+        setPlayMode,
+        handleCollectSentences,
+        handleSubtitleClick,
+        formatTime,
+        setShowForm,
+    }
 }
