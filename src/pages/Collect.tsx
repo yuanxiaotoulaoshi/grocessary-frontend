@@ -1,6 +1,6 @@
 import { useState,useEffect,useRef } from "react"
 import {request,BASE_URL} from '../services/api';
-import ConfirmDialog from "components/dialogue/CancelDialog";
+import ConfirmDialog from "components/Dialogue/CancelDialog";
 import { useInfiniteScroll } from '../hooks/useInfiniteScroll';
 import FormModel from '../components/GlossaryList/FormModel';
 

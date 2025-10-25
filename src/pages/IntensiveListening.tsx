@@ -2,7 +2,7 @@ import {useEffect, useRef,useState} from 'react';
 import { Star } from 'lucide-react';
 import {request} from '../services/api';
 import { useLocation } from 'react-router-dom';
-import VideoUpload from 'components/Listen/VideoUpload';
+import VideoUploadContainer from 'components/Listen/VideoUpload/VideoUploadContainer';
 import FormModel from '../components/GlossaryList/FormModel';
 
 export default function  IntensiveListening() {
@@ -133,20 +133,6 @@ export default function  IntensiveListening() {
                     setTimeout(() => video.play().catch(()=>{}), 0);
                 }
             }
-
-            // const current = subtitles.findIndex((s)=>
-            //     video.currentTime>=s.start && video.currentTime<=s.end
-            // );
-
-            // if(current!==-1&&current!==activeIndex){
-            //     setActiveIndex(current);
-            //     if(!isUserInteracting){
-            //         const el = subtitleRefs.current[current];
-            //         if(el && listRef.current){
-            //             el.scrollIntoView({ behavior: "smooth", block: "nearest" });
-            //         }
-            //     }
-            // }
         };
         video.addEventListener('timeupdate', onTimeUpdate);
         return () => {
@@ -194,20 +180,6 @@ export default function  IntensiveListening() {
         }
     })
 
-    // useEffect(()=>{
-    //     const container = listRef.current;
-    //     if(!container) return;
-    //     const handleMouseEnter = ()=>setIsUserInteracting(true);
-    //     const handleMouseLeave = ()=>setIsUserInteracting(false);
-
-    //     container.addEventListener("mouseenter",handleMouseEnter);
-    //     container.addEventListener("mouseleave",handleMouseLeave);
-    //     return ()=>{
-    //         container.removeEventListener("mouseenter",handleMouseEnter);
-    //         container.removeEventListener("mouseleave",handleMouseLeave);
-    //     }
-    // },[])
-
     const handleSelection = (e: MouseEvent | TouchEvent)=>{
         const selection = window.getSelection();
         const text = selection?.toString().trim();
@@ -238,7 +210,7 @@ export default function  IntensiveListening() {
 
             <div className="p-10 max-w-xl mx-auto">
                 <h1 className="text-2xl font-bold mb-4">Upload Your MP4 Video</h1>
-                <VideoUpload 
+                <VideoUploadContainer 
                     onUploadSuccess={handleUploadSuccess}
                 />
             </div>

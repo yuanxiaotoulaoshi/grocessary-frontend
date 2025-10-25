@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import {request} from '../services/api';
-import PrimaryTabBar from '../components/TabBar/PrimaryTabBar'
+// import PrimaryTabBar from '../components/TabBar/PrimaryTabBar'
 export default function MyChunk() {
     const [type, setType] = useState('idiomatic');
     const [chunkList, setChunkList] = useState([]);
@@ -33,7 +33,7 @@ export default function MyChunk() {
 
     return (
         <div>
-            <PrimaryTabBar/>
+            {/* <PrimaryTabBar/> */}
             {chunkList.map((item,index) => (
                 <li
                     key={index}

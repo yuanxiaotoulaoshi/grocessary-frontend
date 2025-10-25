@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import ListUI from './ListUI';
-import useList from './UseList';
+import useList from './useList';
 import { useSearch } from 'hooks/useSearch';
 import { useInfiniteScroll } from 'hooks/useInfiniteScroll';
 import { GlossaryItem } from 'types/glossary';

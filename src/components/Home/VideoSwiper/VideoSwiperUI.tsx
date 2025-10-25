@@ -1,43 +1,22 @@
-import { useEffect, useState } from 'react';
+
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { useNavigate } from 'react-router-dom';
+type VideoItem = {
+    url: string;
+    cover?: string;
+};
 
-import {request,BASE_URL} from '../../services/api';
+interface VideoSwiperProps {
+    videos:VideoItem[];
+    navigateToPage:(url:string)=>void;
+}
 
-export default function VideoSwiper(){
-    const navigate = useNavigate();
-
-    type VideoItem = {
-        url: string;
-        cover?: string;
-    };
-    const [videos, setVideos] = useState<VideoItem[]>([]);
-
-    const navigateToPage = (videoUrl:string)=>{
-        navigate('/glossary/listening',{ state: { videoUrl } });
-    }
-
-    useEffect(() => {
-        request({
-            method: 'GET',
-            url: '/listen/random-videos',
-        }).then(res=>{
-            console.log(res)
-            const mockVideos = res.map((item:{fileName:string, cover:string})=>{
-                return {
-                    url:BASE_URL+item.fileName,
-                    cover:BASE_URL+item.cover
-                }
-            });
-            setVideos(mockVideos);
-        })
-    }, []);
-
-    if (!videos.length) return null;
-
+export default function VideoSwiper({
+    videos,
+    navigateToPage,
+}:VideoSwiperProps){
     return (
         <div className="w-full max-w-6xl mx-auto px-4 py-8">
             <h2 className="text-xl font-bold mb-8 text-center">最近上传的视频</h2>

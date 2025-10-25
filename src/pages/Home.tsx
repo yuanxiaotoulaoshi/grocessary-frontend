@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import VideoSwiper from 'components/Home/VideoSwiper';
+import VideoSwiperContainer from 'components/Home/VideoSwiper/VideoSwiperContainer';
 
 export default function Home() {
   return (
@@ -37,7 +37,7 @@ export default function Home() {
       </main>
 
       {/* 功能介绍 */}
-      <VideoSwiper/>
+      <VideoSwiperContainer/>
 
       {/* 页脚 */}
       <footer className="border-t py-6 text-center text-sm text-gray-500">

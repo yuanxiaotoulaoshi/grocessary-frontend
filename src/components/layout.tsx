@@ -1,7 +1,7 @@
 // components/Layout.tsx
 import { Link } from 'react-router-dom';
 import LoginBar from './AccountInfo/LoginBar';
-import ProfileMenu from './AccountInfo/ProfileMenu';
+import ProfileMenu from './AccountInfo/ProfileMenu/ProfileMenuContainer';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../store';
 import {login,logout} from '../store/authSlice';
