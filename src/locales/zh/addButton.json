@@ -1,0 +1,8 @@
+{
+    "add":{
+        "addBtn":"添加词条"
+    },
+    "search":{
+        "searchPlaceHolder":"搜索术语（中英文均可）"
+    }
+}

@@ -1,6 +1,8 @@
 import ConfirmDialog from "components/Dialogue/CancelDialog";
 import FormModalContainer from 'components/GlossaryList/FormModal/FormModalContainer';
+import LoadMoreContainer from 'components/LoadMore/LoadMoreContainer';
 import { FavoriteItem } from 'types/favoriteItem';
+import {useTranslation} from 'react-i18next';
 
 interface CollectUIProps{
     listRef:React.LegacyRef<HTMLDivElement>;
@@ -41,9 +43,10 @@ export default function Collect({
     cancelCollect,
     setShowForm,
 }:CollectUIProps){
+	const {t} = useTranslation('collect');
     return(
         <div ref={listRef} className="max-w-2xl mx-auto mt-8 p-6 bg-gray-50 rounded-3xl shadow-md">
-		    <h2 className="text-2xl font-bold mb-4">我的收藏</h2>
+		    <h2 className="text-2xl font-bold mb-4">{t('collect.title')}</h2>
             {favorites.length===0?
                 (
                 <div className="flex flex-col items-center justify-center py-20 text-center text-gray-500">
@@ -61,8 +64,8 @@ export default function Collect({
                         d="M5 13l4 4L19 7"
                     />
                     </svg>
-                    <p className="text-lg">您还没有收藏任何内容哦~</p>
-                    <p className="mt-2 text-sm">快去看看，收藏一些喜欢的句子吧！</p>
+                    <p className="text-lg">{t('collect.emptyDesc')}</p>
+                    <p className="mt-2 text-sm">{t('collect.emptySuggestion')}</p>
                 </div>
                 ):(<ul className="space-y-4">
                     {favorites.map((item,index) => (
@@ -76,7 +79,7 @@ export default function Collect({
                             <div className="flex-1">
                             <p className="text-gray-800">{item.sentence}</p>
                             <p className="text-sm text-gray-500 mt-1">
-                                时长: {(item.end - item.start).toFixed(2)} 秒 | 收藏日期: {formatDate(item.collectedAt)}天前
+                                {t('collect.duration')} {(item.end - item.start).toFixed(2)} {t('collect.unit')} {t('collect.collectDate')} {formatDate(item.collectedAt)}{t('collect.daysAgo')}
                             </p>
                             </div>
                             <div className="flex gap-2">
@@ -85,7 +88,7 @@ export default function Collect({
                                     onClick={(e) => handleDelete(e,item._id)}
                                     className="px-4 py-2 bg-theme text-white rounded-xl hover:bg-theme transition"
                                 >
-                                    取消收藏
+                                    {t('collect.cancelBtn')}
                                 </button>
                             </div>
                             
@@ -95,14 +98,12 @@ export default function Collect({
             }
 
             {/* loadmore */}
-            <div className="flex flex-col items-center mt-6 space-y-2">
-                {!isLoading && !isLastPage && <div className="text-theme cursor-pointer hover:underline text-sm" ref={loadMoreRef}></div>}
-                {isLoading && <p className="text-gray-500 text-sm animate-pulse">加载中...</p>}
-                {favorites.length === 0 && !isLoading && (
-                    <p className="text-center text-gray-500">暂无数据</p>
-                )}
-                {isLastPage && favorites.length>0 && <p className="text-gray-400 text-sm">没有更多了</p>}
-            </div>
+            <LoadMoreContainer
+                isLoading={isLoading}
+                isLastPage={isLastPage}
+                loadMoreRef={loadMoreRef}
+                dataList={favorites}
+            />
 
             <ConfirmDialog
                 isOpen={showCancel}

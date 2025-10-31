@@ -1,0 +1,12 @@
+{
+    "collect":{
+        "title":"My collections",
+        "emptyDesc":"You don't have any collection yet!",
+        "emptySuggestion":"You can start listening intensively and collect your sentences",
+        "duration":"duration:",
+        "unit":"seconds",
+        "collectDate":"| collect date:",
+        "daysAgo":"days ago",
+        "cancelBtn":"Cancel"
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "collect":{
+        "title":"我的收藏",
+        "emptyDesc":"您还没有收藏任何内容哦~",
+        "emptySuggestion":"快去看看，收藏一些喜欢的句子吧！",
+        "duration":"时长:",
+        "unit":"秒",
+        "collectDate":"| 收藏日期:",
+        "daysAgo":"天前",
+        "cancelBtn":"取消收藏"
+    }
+}

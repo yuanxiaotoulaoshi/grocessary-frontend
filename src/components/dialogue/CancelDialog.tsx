@@ -1,4 +1,5 @@
 import { Description, Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
+import {useTranslation} from 'react-i18next';
 
 interface ConfirmDislogueProps {
     isOpen:boolean,
@@ -7,6 +8,7 @@ interface ConfirmDislogueProps {
 }
 
 const ConfirmDialog:React.FC<ConfirmDislogueProps> =({isOpen,onClose,onConfirm})=>{
+	const {t} = useTranslation('dialogue');
     return (
         <Dialog open={isOpen} onClose={onClose} className="relative z-50">
 
@@ -14,10 +16,10 @@ const ConfirmDialog:React.FC<ConfirmDislogueProps> =({isOpen,onClose,onConfirm})
             <div className="fixed inset-0 flex items-center justify-center p-4">
                 <DialogPanel className="w-full max-w-md rounded-xl bg-white p-6 shadow-xl">
 
-                <DialogTitle className="text-lg font-bold">确认取消收藏？</DialogTitle>
+                <DialogTitle className="text-lg font-bold">{t('cancelDialogue.confirmCancel')}</DialogTitle>
 
                     <Description className="text-sm text-gray-500 mt-2">
-                        此操作不可撤销。
+                        {t('cancelDialogue.warning')}
                     </Description>
 
                     <div className="mt-6 flex justify-end gap-3">
@@ -25,14 +27,14 @@ const ConfirmDialog:React.FC<ConfirmDislogueProps> =({isOpen,onClose,onConfirm})
                             className="px-4 py-2 rounded-xl bg-gray-200 hover:bg-gray-300 transition"
                             onClick={onClose}
                         >
-                        取消
+                        {t('cancelDialogue.cancelBtn')}
                         </button>
 
                         <button
                             className="px-4 py-2 rounded-xl bg-red-500 text-white hover:bg-red-600 transition"
                             onClick={onConfirm}
                         >
-                        确定删除
+                            {t('cancelDialogue.canfirmBtn')}
                         </button>
                     </div>
                 </DialogPanel>

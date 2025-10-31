@@ -1,0 +1,8 @@
+{
+    "menu":{
+        "darkModal":"dark modal",
+        "lightModal":"light modal",
+        "personalProfile":"personal profile",
+        "loginOut":"login out"
+    }
+}

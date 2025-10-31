@@ -1,0 +1,12 @@
+{
+    "home":{
+        "welcome":"欢迎使用",
+        "webName":"Lexily",
+        "webIntro":"开发者专属中英术语词典，快速理解技术概念。",
+        "dictionaryBtn":"查看术语词典",
+        "intensiveBtn":"精听",
+        "collectionBtn":"我的收藏",
+        "at":"@",
+        "belowIntro":"Glossary. All rights reserved."
+    }
+}

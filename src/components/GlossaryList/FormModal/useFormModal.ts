@@ -17,6 +17,7 @@ export function useFormModal(defaultEnName:string,currentMetadata:string){
         handleSubmit,
         formState: { errors },
         watch,
+        reset,
         setValue,
         trigger,
     } = useForm({
@@ -58,6 +59,15 @@ export function useFormModal(defaultEnName:string,currentMetadata:string){
     const secondCategory = categoryInfo[curFirstCategory] || [];
 
     useEffect(() => {
+        reset({
+        cnName: defaultEnName?'/':'',
+        enName: defaultEnName,
+        curFirstCategory: '',
+        curSecondCategory: ''
+        });
+      }, [defaultEnName]);
+
+    useEffect(() => {
         setValue('curSecondCategory', '');
     }, [curFirstCategory, setValue]);
 
@@ -75,13 +85,15 @@ export function useFormModal(defaultEnName:string,currentMetadata:string){
         request({
         method: 'POST',
         url: '/glossary/add',
-        data: {
-            ...data,
-            cnName: data.cnName || '/',
+        data:{
+            cnName:data.cnName||'/',
+            enName:data.enName,
+            categoryLevel1:data.curFirstCategory,
+            categoryLevel2:data.curSecondCategory,
             currentMetadata,
-        },
+        }
         }).then((res) => {
-        alert(res.insert ? '插入成功，审核中！' : res.message);
+            alert(res.insert ? '插入成功，审核中！' : res.message);
         });
     });
 

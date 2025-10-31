@@ -1,0 +1,8 @@
+{
+    "add":{
+        "addBtn":"add term"
+    },
+    "search":{
+        "searchPlaceHolder":"search for items (both English and Chinese can be available)"
+    }
+}

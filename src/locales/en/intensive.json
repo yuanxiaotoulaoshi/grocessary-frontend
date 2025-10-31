@@ -1,0 +1,12 @@
+{
+    "intensive":{
+        "title":"Upload Your MP4 Video",
+        "uploadButton":"Upload",
+        "subtitles":"Subtitles"
+    },
+    "playMode":{
+        "order":"Play in Order",
+        "pause":"Auto Pause",
+        "loop":"Sentence Loop Mode"
+    }
+}

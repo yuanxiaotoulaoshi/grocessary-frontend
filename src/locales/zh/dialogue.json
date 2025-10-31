@@ -1,0 +1,8 @@
+{
+    "cancelDialogue":{
+        "confirmCancel":"确认取消收藏？",
+        "warning":"此操作不可撤销。",
+        "cancelBtn":"取消",
+        "canfirmBtn":"确认删除"
+    }
+}

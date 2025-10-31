@@ -1,0 +1,7 @@
+{
+    "loadMore":{
+        "isLoading":"加载中...",
+        "emptyData":"暂无数据",
+        "noMore":"没有更多了"
+    }
+}

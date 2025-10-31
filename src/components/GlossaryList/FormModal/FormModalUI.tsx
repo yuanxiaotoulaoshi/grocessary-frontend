@@ -1,8 +1,8 @@
 // src/components/GlossaryList/FormModal/FormModalUI.tsx
 import { RefreshCcw } from 'lucide-react';
+import {useTranslation} from 'react-i18next';
 
 interface FormModelProps {
-    // showForm: boolean;
     formFields:{
         cnName: string;
         enName: string;
@@ -22,7 +22,6 @@ interface FormModelProps {
 }
 
 export default function FormModalUI({
-    // showForm,
     formFields,
     level1Tabs,
     secondCategory,
@@ -35,8 +34,7 @@ export default function FormModalUI({
     accentColor = '#22c55e',
     className = '',
 }:FormModelProps){
-    // if(!showForm) return null;
-    
+	const {t} = useTranslation('formModal');
     const themeClass =
     theme === 'dark'
       ? 'bg-gray-800 text-gray-100 border-gray-600'
@@ -50,7 +48,7 @@ export default function FormModalUI({
             }}>
                 <div className="grid grid-cols-2 gap-4">
                     <div>
-                        <label className={`text-sm ${errors.cnName ? 'text-red-500' : 'text-gray-600'}`}>中文名</label>
+                        <label className={`text-sm ${errors.cnName ? 'text-red-500' : 'text-gray-600'}`}>{t("formModal.chineseName")}</label>
                         <input 
                             type="text" 
                             value={formFields.cnName}
@@ -60,9 +58,9 @@ export default function FormModalUI({
                     </div>
                     <div>
                         <div className='flex items-center'>
-                            <label className={`text-sm ${errors.enName ? 'text-red-500' : 'text-gray-600'}`}>英文名</label>
+                            <label className={`text-sm ${errors.enName ? 'text-red-500' : 'text-gray-600'}`}>{t("formModal.englishName")}</label>
                             <RefreshCcw onClick={onTranslate} className="w-3 h-3 ml-3"/>
-                            <div className="ml-1 text-xs text-gray-600">自动翻译</div>
+                            <div className="ml-1 text-xs text-gray-600">{t("formModal.autoTranslate")}</div>
                         </div>
                         <input 
                             type="text" 
@@ -72,18 +70,18 @@ export default function FormModalUI({
                         />
                     </div>
                     <div className="col-span-2">
-                        <label className={`text-sm ${errors.curFirstCategory ? 'text-red-500' : 'text-gray-600'}`}>一级分类</label>
+                        <label className={`text-sm ${errors.curFirstCategory ? 'text-red-500' : 'text-gray-600'}`}>{t("formModal.primaryCategory")}</label>
                         <select 
                             className="w-full p-2 border rounded" 
                             value={formFields.curFirstCategory}
                             onChange={(e) => onChange('curFirstCategory', e.target.value)}
                         >
-                        <option value="">请选择</option>
+                        <option value="">{t("formModal.pleaseChoose")}</option>
                         {level1Tabs.map((item)=>(<option key={item} value={item}>{item}</option>))}
                         </select>
                     </div>
                     <div className="col-span-2">
-                        <label className={`text-sm ${errors.curSecondCategory ? 'text-red-500' : 'text-gray-600'}`}>二级分类</label>
+                        <label className={`text-sm ${errors.curSecondCategory ? 'text-red-500' : 'text-gray-600'}`}>{t("formModal.secondaryCategory")}</label>
                         <select 
                             className={`w-full p-2 border rounded ${
                                 !formFields.curFirstCategory
@@ -94,15 +92,15 @@ export default function FormModalUI({
                             value={formFields.curSecondCategory}
                             onChange={(e) => onChange('curSecondCategory', e.target.value)}
                         >
-                        <option className="" value="">请选择</option>
+                        <option className="" value="">{t("formModal.pleaseChoose")}</option>
                         {secondCategory.map((item)=>(<option key={item} value={item}>{item}</option>))}
                         </select>
                     </div>
                 </div>
 
                 <div className="flex justify-end space-x-4 mt-5">
-                    <button type="button" onClick={onCancel} className="text-gray-600 hover:underline">取消</button>
-                    <button type="submit"  className="text-white px-4 py-2 rounded" style={{ backgroundColor: accentColor }}>提交</button>
+                    <button type="button" onClick={onCancel} className="text-gray-600 hover:underline">{t("formModal.cancelBtn")}</button>
+                    <button type="submit"  className="text-white px-4 py-2 rounded" style={{ backgroundColor: accentColor }}>{t("formModal.submit")}</button>
                 </div>
             </form>   
         </div>

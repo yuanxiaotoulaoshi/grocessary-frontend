@@ -1,0 +1,12 @@
+{
+    "formModal":{
+        "chineseName":"Chinese Name",
+        "englishName":"English Name",
+        "autoTranslate":"Auto translate",
+        "primaryCategory":"Primary category",
+        "pleaseChoose":"Please choose",
+        "secondaryCategory":"Secondary category",
+        "cancelBtn":"Cancel",
+        "submit":"Submit"
+    }
+}

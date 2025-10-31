@@ -1,0 +1,8 @@
+{
+    "menu":{
+        "darkModal":"暗黑模式",
+        "lightModal":"亮色模式",
+        "personalProfile":"个人档案",
+        "loginOut":"退出登录"
+    }
+}

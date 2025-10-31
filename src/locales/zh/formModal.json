@@ -1,0 +1,12 @@
+{
+    "formModal":{
+        "chineseName":"中文名",
+        "englishName":"英文名",
+        "autoTranslate":"自动翻译",
+        "primaryCategory":"一级分类",
+        "pleaseChoose":"请选择",
+        "secondaryCategory":"二级分类",
+        "cancelBtn":"取消",
+        "submit":"提交"
+    }
+}

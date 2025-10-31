@@ -1,0 +1,12 @@
+{
+    "home":{
+        "welcome":"Welcome to use",
+        "webName":"Lexily",
+        "webIntro":"a professional dictionary for developers, helping understand professional terms.",
+        "dictionaryBtn":"term dictionary",
+        "intensiveBtn":"intensive listening",
+        "collectionBtn":"my collection",
+        "at":"@",
+        "belowIntro":"Glossary. All rights reserved."
+    }
+}

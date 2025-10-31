@@ -1,8 +1,10 @@
 import {useEffect, useRef,useState} from 'react';
 import {request} from '../../services/api';
 import { useLocation } from 'react-router-dom';
+import {useTranslation} from 'react-i18next';
 
 export default function useIntensive(){
+	const {t} = useTranslation('intensive');
     type PlayMode = 'default' | 'pauseAfter' | 'loop';
     type SubtitleSegment = {
         index: number;
@@ -28,9 +30,9 @@ export default function useIntensive(){
     const subtitleRefs = useRef<(HTMLDivElement | null)[]>([]);
 
     const modeSettings: { mode: PlayMode; name: string }[] = [
-        { mode: 'default', name: '顺序播放' },
-        { mode: 'pauseAfter', name: '播一句暂停' },
-        { mode: 'loop', name: '单句循环' },
+        { mode: 'default', name: t('playMode.order') },
+        { mode: 'pauseAfter', name: t('playMode.pause') },
+        { mode: 'loop', name: t('playMode.loop') },
     ];
     const handleSubtitleClick = (startTime:number,endTime:number)=>{
         if(videoRef.current){

@@ -1,0 +1,12 @@
+{
+    "intensive":{
+        "title":"上传MP4视频",
+        "uploadButton":"上传",
+        "subtitles":"字幕"
+    },
+    "playMode":{
+        "order":"顺序播放",
+        "pause":"自动暂停",
+        "loop":"循环播放"
+    }
+}

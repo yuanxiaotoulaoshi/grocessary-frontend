@@ -1,0 +1,8 @@
+{
+    "cancelDialogue":{
+        "confirmCancel":"Are you sure you want to cancel this collection?",
+        "warning":"This operation can't be withdrawn.",
+        "cancelBtn":"Cancel",
+        "canfirmBtn":"Canfirm delete"
+    }
+}

@@ -1,8 +1,8 @@
-import TabBarContainer from 'components/GlossaryList/TabBar/TabBarContainer';
-import SearchInputContainer from '../components/GlossaryList/SearchInput/SearchInputContainer';
-import AddButton from '../components/GlossaryList/AddButton';
-import FormModalContainer from 'components/GlossaryList/FormModal/FormModalContainer';
 import { useState } from 'react';
+import TabBarContainer from 'components/GlossaryList/TabBar/TabBarContainer';
+import SearchInputContainer from 'components/GlossaryList/SearchInput/SearchInputContainer';
+import AddButton from 'components/GlossaryList/AddButton';
+import FormModalContainer from 'components/GlossaryList/FormModal/FormModalContainer';
 import ListContainer from 'components/GlossaryList/List/ListContainer';
 
 export default function GlossaryList() {

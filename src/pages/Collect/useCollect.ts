@@ -14,7 +14,6 @@ export default function useCollect(){
     const [audioInstance, setAudioInstance] = useState<HTMLAudioElement|null>(null);
 
     const PAGE_SIZE = 10;
-
     const { pageIndex, isLastPage, nextPage, reset, checkIfLastPage } = usePagination({
             pageSize: PAGE_SIZE,
         });
@@ -102,7 +101,6 @@ export default function useCollect(){
             url: '/listen/favorites',
         }).then((res) => {
             setFavorites(reset ? res : [...favorites, ...res]);
-            // setIsLastPage(res.length < PAGE_SIZE);
             checkIfLastPage(res.length);
             setIsLoading(false);
         });

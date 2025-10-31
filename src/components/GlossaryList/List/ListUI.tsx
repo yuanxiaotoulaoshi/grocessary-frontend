@@ -1,4 +1,5 @@
 import Volume from '../Volume';
+import LoadMoreContainer from 'components/LoadMore/LoadMoreContainer';
 
 type glossaryItem = {
     id:string,
@@ -43,14 +44,12 @@ export default function ListUI({
             ))}
 
             {/* loadmore */}
-            <div className="flex flex-col items-center mt-6 space-y-2">
-                {!isLoading && !isLastPage && <div className="text-theme cursor-pointer hover:underline text-sm" ref={loadMoreRef}></div>}
-                {isLoading && <p className="text-gray-500 text-sm animate-pulse">加载中...</p>}
-                {filteredList.length === 0 && !isLoading && (
-                    <p className="text-center text-gray-500">暂无数据</p>
-                )}
-                {isLastPage && filteredList.length>0 && <p className="text-gray-400 text-sm">没有更多了</p>}
-            </div>
+            <LoadMoreContainer
+                isLoading={isLoading}
+                isLastPage={isLastPage}
+                loadMoreRef={loadMoreRef}
+                dataList={filteredList}
+            />
             
         </div>
     );

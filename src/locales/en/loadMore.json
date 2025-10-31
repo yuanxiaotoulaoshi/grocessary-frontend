@@ -1,0 +1,7 @@
+{
+    "loadMore":{
+        "isLoading":"loading...",
+        "emptyData":"No data available",
+        "noMore":"no more data"
+    }
+}

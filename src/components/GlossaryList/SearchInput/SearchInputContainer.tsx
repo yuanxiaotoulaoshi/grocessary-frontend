@@ -1,3 +1,4 @@
+import {useTranslation} from 'react-i18next';
 import SearchInputUI from "./SearchInputUI";
 interface SearchInputContainerProps{
     searchTerm: string;
@@ -7,11 +8,12 @@ export default function FormModalContainer({
     searchTerm,
     setSearchTerm,
 }:SearchInputContainerProps){
+	const {t} = useTranslation('addButton');
     const onChange = (e:React.ChangeEvent<HTMLInputElement>)=> setSearchTerm(e.target.value)
     return (
         <SearchInputUI
             value={searchTerm}
-            placeholder="🔍 搜索术语（中英文均可）"
+            placeholder={'🔍 '+t('search.searchPlaceHolder')}
             onChange={onChange}
         />
     )

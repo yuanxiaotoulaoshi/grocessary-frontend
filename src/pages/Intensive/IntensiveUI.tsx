@@ -1,6 +1,7 @@
 import { Star } from 'lucide-react';
 import VideoUploadContainer from 'components/Listen/VideoUpload/VideoUploadContainer';
 import FormModalContainer from 'components/GlossaryList/FormModal/FormModalContainer';
+import {useTranslation} from 'react-i18next';
 
 type SubtitleSegment = {
     index: number;
@@ -50,11 +51,13 @@ export default function  IntensiveListening({
     formatTime,
     setShowForm,
 }:IntensiveUIProps) {
+    const {t} = useTranslation('intensive');
+    
     return (
         <div className="p-6 bg-gray-50 min-h-screen">
 
             <div className="p-10 max-w-xl mx-auto">
-                <h1 className="text-2xl font-bold mb-4">Upload Your MP4 Video</h1>
+                <h1 className="text-2xl font-bold mb-4">{t('intensive.title')}</h1>
                 <VideoUploadContainer 
                     onUploadSuccess={handleUploadSuccess}
                 />
@@ -85,7 +88,7 @@ export default function  IntensiveListening({
                 </div>
                 
                 <div className="flex-1 max-h-[500px] overflow-y-auto bg-white rounded-xl shadow-md border p-4">
-                    <h3 className="text-lg font-semibold mb-4">Subtitles</h3>
+                    <h3 className="text-lg font-semibold mb-4">{t('intensive.subtitles')}</h3>
                     <div ref={listRef} className="space-y-3">
                         {subtitles.map((sub,index)=>(    
                             <div 

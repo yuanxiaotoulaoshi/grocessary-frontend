@@ -1,0 +1,19 @@
+{
+  "login": {
+    "title": "Login",
+    "usernamePlaceholder": "Username or email",
+    "passwordPlaceholder": "Password",
+    "remember": "Remember me",
+    "loginButton": "Login",
+    "forgetPassword": "Forgot password?",
+    "createAccount": "Create new account"
+  },
+   "register": {
+    "title": "Register",
+    "usernamePlaceholder": "Username",
+    "passwordPlaceholder": "Password",
+    "emailPlaceholder": "Email",
+    "createAccount": "Create",
+    "googleLogin": "Login with google account"
+  }
+}
